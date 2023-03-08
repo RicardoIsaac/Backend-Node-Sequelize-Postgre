@@ -1,0 +1,27 @@
+{
+  "name": "aid-4-aids",
+  "version": "1.0.0",
+  "description": "Backend Prueba tecnica",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RicardoIsaac/aid4aid.git"
+  },
+  "author": "Ricardo isaac",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RicardoIsaac/aid4aid/issues"
+  },
+  "homepage": "https://github.com/RicardoIsaac/aid4aid#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
