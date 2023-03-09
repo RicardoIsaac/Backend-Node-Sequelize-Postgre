@@ -15,7 +15,7 @@ app.use(bodyParser.json());//  middleware permite analizxar la solicitud en un f
 app.use(bodyParser.urlencoded({ extended: true }));// middleware permite analizxar la solicitud en un fomato codificado url
 
 
-const db = require("./models")
+const db = require("./models/user")
 /*
 const Role=db.role
 db.sequelize.sync({force:true}).then(() => {// produccion solo se usa db.sequelize.sync();

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   const Product = sequelize.define("products", {
-    Codigo: {//
+    codigo: {//
       type: DataTypes.NUMBER,
       allowNull: false,
     },
@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       type: DataTypes.NUMBER,
       allowNull: false,
     },
-    Existencias: {//
+    existencias: {//
         type: DataTypes.NUMBER,
         allowNull: false,
       },
@@ -22,3 +22,4 @@ module.exports = (sequelize) => {
   });
   return Product;
 };
+// autor editorial
