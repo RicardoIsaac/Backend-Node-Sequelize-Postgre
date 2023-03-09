@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  const Product = sequelize.define("products", {
+  const Product = sequelize.define("product", {
     codigo: {//
       type: DataTypes.NUMBER,
       allowNull: false,

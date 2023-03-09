@@ -1,4 +1,4 @@
-const config = require("../../config/db.js")
+const config = require("../config/db.js")
 
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize(
@@ -27,6 +27,11 @@ db.sequelize = sequelize;
 db.user = require("./user.models")(sequelize, Sequelize);
 db.role = require("./role.models")(sequelize, Sequelize);
 
+db.product = require("../product.models")(sequelize, Sequelize);
+db.editorial = require("./editorial.models")(sequelize, Sequelize);
+db.autor = require("./autor.models")(sequelize, Sequelize);
+
+
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
@@ -37,6 +42,25 @@ db.user.belongsToMany(db.role, {
   foreignKey: "userId",
   otherKey: "roleId"
 });
+
+
+db.editorial.belongsToMany(dbp.product,{
+  through: "product_editorial",
+  foreignKey: "editorialId",
+  otherKey: "productId"
+});
+db.product.belongsToMany(dbp.editorial,{
+  through: "product_editorial",
+  foreignKey: "productId",
+  otherKey: "editorialId"
+});
+
+db.autor.hasMany(dbp.product,{as:"product"})
+db.product.belongsTo(dbp.autor,{
+    foreignKey:"autorId",
+    as:"autor"
+})
+
 
 db.ROLES = ["user", "admin", "moderator"];
 
