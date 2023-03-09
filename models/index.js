@@ -27,7 +27,7 @@ db.sequelize = sequelize;
 db.user = require("./user.models")(sequelize, Sequelize);
 db.role = require("./role.models")(sequelize, Sequelize);
 
-db.product = require("../product.models")(sequelize, Sequelize);
+db.product = require("./product.models")(sequelize, Sequelize);
 db.editorial = require("./editorial.models")(sequelize, Sequelize);
 db.autor = require("./autor.models")(sequelize, Sequelize);
 
@@ -44,21 +44,27 @@ db.user.belongsToMany(db.role, {
 });
 
 
-db.editorial.belongsToMany(dbp.product,{
+db.editorial.belongsToMany(db.product,{
   through: "product_editorial",
   foreignKey: "editorialId",
   otherKey: "productId"
 });
-db.product.belongsToMany(dbp.editorial,{
+db.product.belongsToMany(db.editorial,{
   through: "product_editorial",
   foreignKey: "productId",
   otherKey: "editorialId"
 });
 
-db.autor.hasMany(dbp.product,{as:"product"})
-db.product.belongsTo(dbp.autor,{
-    foreignKey:"autorId",
-    as:"autor"
+
+db.autor.belongsToMany(db.product,{
+  through: "autor_product",
+  foreignKey: "autorId",
+  otherKey: "productId"
+})
+db.product.belongsToMany(db.autor,{
+  through: "autor_product",
+  foreignKey: "productId",
+  otherKey: "autorId"
 })
 
 

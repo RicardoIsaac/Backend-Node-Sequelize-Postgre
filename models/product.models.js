@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   const Product = sequelize.define("product", {
     codigo: {//
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     titulo: {//
@@ -11,15 +11,14 @@ module.exports = (sequelize) => {
       unique: true,
     },
     precio: {//
-      type: DataTypes.NUMBER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     existencias: {//
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
 
   });
   return Product;
 };
-// autor editorial
