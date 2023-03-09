@@ -18,7 +18,8 @@ exports.signup = (req, res) => {
   })
     .then((user) => {
       if (req.body.roles) {
-        Role.findAll({ where: { name: { [Op.or]: req.body.roles } } }).then(
+        Role.findAll({ where: { name: { [Op.or]: req.body.roles } } })
+        .then(
           (roles) => {
             user.setRoles(roles).then(() => {
               res.send({ message: "User was registered successfully!" });
@@ -31,6 +32,8 @@ exports.signup = (req, res) => {
         });
       }
     })
+
+    
     .catch((err) => {
       res.status(500).send({ message: err.message });
     });
@@ -73,3 +76,5 @@ exports.signin = (req, res) => {
       })
       .catch(err => { res.status(500).send({ message: err.message }); });
   };
+
+  
