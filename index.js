@@ -16,33 +16,39 @@ app.use(bodyParser.urlencoded({ extended: true }));// middleware permite analizx
 
 
 const db = require("./models")
+/*
 const Role=db.role
-
 db.sequelize.sync({force:true}).then(() => {// produccion solo se usa db.sequelize.sync();
   console.log('drop and resync database');
   initial();
 }); 
+
 // posteo automatico de primeros roles
 function initial() {
   Role.create({
     id: 1,
     name: "user"
   });
- 
+  
   Role.create({
     id: 2,
     name: "moderator"
   });
- 
+  
   Role.create({
     id: 3,
     name: "admin"
   });
 }
+*/
+db.sequelize.sync();
 //
 app.get("/", (req, res) => {
     res.json({ message: "connection with express" });
   });// ruta de prueba
+
+  require('./routes/auth.routes')(app);
+  require('./routes/user.routes')(app);
 
 app.use(express.json());
 const port = process.env.port || 8080;
