@@ -1,3 +1,4 @@
+require("dotenv").config();
 module.exports = {
-    secret: "aid4aids-secret-key"
+    secret: process.env.jwt_secret
   };
