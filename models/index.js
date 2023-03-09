@@ -1,5 +1,5 @@
+//llama a la configuracion para conectar
 const config = require("../config/db.js")
-
 const Sequelize = require("sequelize");
 
 //conexion con la database
