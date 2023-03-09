@@ -10,4 +10,8 @@ module.exports = function(app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.getall
     )
+    app.put("/api/product/restock", 
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.restock
+    )
 }

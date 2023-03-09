@@ -52,6 +52,20 @@ exports.test = (req, res) => {
 
 exports.getall= async(req, res) => {
   let product= await Product.findAll({})
-  const filteredproduct = product.map(book => ({titulo: book.titulo, existencias: book.existencias}));
+  const filteredproduct = product.map(e => ({titulo: e.titulo, existencias: e.existencias}));
   res.send( filteredproduct );
 };
+
+exports.restock= async(req,res)=>{
+  const { titulo , values } = req.body;
+  try {
+    let product= await Product.findAll({  where:{titulo:titulo}})
+    let exist= product.map(e => ({existencias: e.existencias}))
+    let value=exist[0].existencias+values
+   let newExist= await Product.update({existencias:value},{where:{titulo:titulo}})
+  res.status(200).send(newExist)
+    
+  } catch (error) {
+    res.send(error)
+  }
+}
