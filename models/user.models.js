@@ -19,6 +19,11 @@ module.exports=(sequelize)=>{
             defaultValue: [],
             allowNull: true,
           },
+          bougthitems: {
+            type: DataTypes.ARRAY(DataTypes.JSON),
+            defaultValue: [],
+            allowNull: true,
+          },
           adress: {
             type: DataTypes.STRING,
             defaultValue: ""

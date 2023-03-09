@@ -4,16 +4,48 @@ const Product = db.product;
 const User = db.user;
 
 exports.shopping= async (req,res)=>{
+    const {  email , titulo , values } =req.body
 
+    try {
+        let user= await User.findAll({where:{email:email}})
+        const filteredCart = user[0].cart.filter(e => e.name===titulo);
+        const otheritems=user[0].cart.filter(e => e.name!==titulo);
 
+        let product= await Product.findAll({  where:{titulo:titulo}})
+        if(product[0].existencias<values){
+            res.status(200).send({message:"insuficent items"})
+        }
+        else{
+            let cart=[...otheritems]
+            let shop=filteredCart[0].cantidad-values
+            let newitem={
+                name:titulo,
+                cantidad:shop
+            }
+            cart.push(newitem)           
+           let shopUser=await User.update({cart:cart}, { where: { email: email } } )
 
-    
-    res.status(200).send({ message: "test" });
+            // reducir stock
+           let value=product[0].existencias-values
+           // añadir a compras
+            let boughter={
+                user:user[0].username,
+                cantidad:values
+            }
+            let compras= product[0].compras
+            compras.push(boughter)
+            let notificacion= await Product.update({compras:compras ,existencias:value},{where:{titulo:titulo}})
+            res.status(200).send("compra realizada")
+        }
+    } catch (error) {
+        res.status(400).send(error)
+    }
+
 }
 
 exports.addcart = async (req, res) => {
     const {  email , titulo , values } =req.body
-    console.log(req.body)
+
     try {
         let product= await Product.findAll({  where:{titulo:titulo}})
         let user= await User.findAll({where:{email:email}})
@@ -27,7 +59,7 @@ exports.addcart = async (req, res) => {
                 cantidad:values
             }
             cart.push(newobject)
-          
+           
            let add= await User.update({cart:cart}, { where: { email: email } } )
            res.send({add})
         }
