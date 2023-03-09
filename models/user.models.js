@@ -17,7 +17,15 @@ module.exports=(sequelize)=>{
           cart:{
             type: DataTypes.JSONB,
             defaultValue: {}
-          }
+          },
+          adress: {
+            type: DataTypes.STRING,
+            defaultValue: ""
+          },
+          img: {
+            type: DataTypes.STRING,
+            defaultValue: ""
+          },
     });
     return User;
 };
