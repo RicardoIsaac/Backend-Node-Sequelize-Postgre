@@ -1,6 +1,8 @@
 const config = require("../config/db.js")
 
 const Sequelize = require("sequelize");
+
+//conexion con la database
 const sequelize = new Sequelize(
   config.DB,
   config.USER,
@@ -19,11 +21,15 @@ const sequelize = new Sequelize(
   }
 );
 
+
+
 const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+
+//llamado a los modelos para creaciond e tablas y su uso
 db.user = require("./user.models")(sequelize, Sequelize);
 db.role = require("./role.models")(sequelize, Sequelize);
 
@@ -32,10 +38,11 @@ db.editorial = require("./editorial.models")(sequelize, Sequelize);
 db.autor = require("./autor.models")(sequelize, Sequelize);
 
 
+//relacion muchos a muchos entre usuarios y su rol
 db.role.belongsToMany(db.user, {
-  through: "user_roles",
-  foreignKey: "roleId",
-  otherKey: "userId"
+  through: "user_roles",//como se llama la tabla intermedia
+  foreignKey: "roleId", //su llave
+  otherKey: "userId" //la llave de la segunda tabla
 });
 db.user.belongsToMany(db.role, {
   through: "user_roles",
@@ -44,6 +51,7 @@ db.user.belongsToMany(db.role, {
 });
 
 
+//relacion muchos a muchos entre productos y editoriales
 db.editorial.belongsToMany(db.product,{
   through: "product_editorial",
   foreignKey: "editorialId",
@@ -56,6 +64,7 @@ db.product.belongsToMany(db.editorial,{
 });
 
 
+//relacion muchos a muchos entre productos y autores
 db.autor.belongsToMany(db.product,{
   through: "autor_product",
   foreignKey: "autorId",

@@ -4,6 +4,7 @@ const Product = db.product;
 const Autor = db.autor;
 const Editorial = db.editorial;
 
+//crea un producto nuevo y lo relacina con las tabals de autores e editoriales
 exports.createProduct = async (req, res) => {
   const { codigo, titulo, precio, existencias, autors, editorials } = req.body;
 
@@ -50,12 +51,15 @@ exports.test = (req, res) => {
   res.send({ message: "test" });
 };
 
+//obtiene todos los productos
 exports.getall= async(req, res) => {
   let product= await Product.findAll({})
   const filteredproduct = product.map(e => ({titulo: e.titulo, existencias: e.existencias}));
   res.send( filteredproduct );
 };
 
+
+//restockea los productos
 exports.restock= async(req,res)=>{
   const { titulo , values } = req.body;
   try {
