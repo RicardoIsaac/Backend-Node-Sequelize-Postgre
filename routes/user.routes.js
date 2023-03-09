@@ -30,6 +30,12 @@ module.exports = function(app) {
       controller.adminBoard
     );
 
+    app.get(
+      "/api/test/usercart/:email",
+      [authJwt.verifyToken],
+      controller.findUserCart
+    );
+
     app.put(
       "/api/test/update",
       [authJwt.verifyToken],

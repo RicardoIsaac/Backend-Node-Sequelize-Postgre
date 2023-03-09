@@ -34,3 +34,15 @@ exports.allAccess = (req, res) => {
     }
   
   };
+  exports.findUserCart = async (req, res) => {
+    const {  email  } =req.params
+
+    try {
+      
+      let user= await User.findAll({where:{email:email}})
+      res.send(user[0].cart)
+    } catch (error) {
+      res.status(400).send(error)
+    }
+  
+  };
