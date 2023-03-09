@@ -12,6 +12,12 @@ module.exports = function(app) {
 
       app.put(
         "/api/test/shop",
+             [authJwt.verifyToken],
         controller.shopping
+      )
+      app.put(
+        "/api/test/addcart",
+    [authJwt.verifyToken],
+        controller.addcart
       )
 }
