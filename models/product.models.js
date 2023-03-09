@@ -18,6 +18,11 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      compras: {
+        type: DataTypes.ARRAY(DataTypes.JSON),
+        defaultValue: [],
+        allowNull: true,
+      },
 
   });
   return Product;

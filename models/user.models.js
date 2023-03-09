@@ -14,9 +14,10 @@ module.exports=(sequelize)=>{
             type: DataTypes.STRING,
             allowNull: false,
           },
-          cart:{
-            type: DataTypes.JSONB,
-            defaultValue: {}
+          cart: {
+            type: DataTypes.ARRAY(DataTypes.JSON),
+            defaultValue: [],
+            allowNull: true,
           },
           adress: {
             type: DataTypes.STRING,
